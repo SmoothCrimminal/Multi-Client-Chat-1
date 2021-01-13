@@ -47,6 +47,9 @@ int main(int argc , char *argv[])
 	int max_sd; 
     char user_list[100][50];
     
+    memset(user_list, 0, sizeof user_list);
+    
+    
 	struct sockaddr_in address; 
     struct hostent *heLocalHost;
 		
@@ -108,7 +111,7 @@ int main(int argc , char *argv[])
 	//accept the incoming connection 
 	addrlen = sizeof(address); 
 	puts("Waiting for connections ..."); 
-		
+
 	while(TRUE) 
 	{ 
 		//clear the socket set 
@@ -236,18 +239,19 @@ int main(int argc , char *argv[])
                     
                     if(strcmp(dest,"Welcome") == 0) {
                         strcpy(user_list[i], name);
-                        send(sd , buffer , strlen(buffer) , 0 ); 
+                        puts("a");
+//                        send(sd , buffer , strlen(buffer) , 0 ); 
                     } else if(strcmp(dest,"List") == 0) {
                         strcpy(msg, "\0");
-                        for(g = 0; g < 3; g++) {
-                            if(strcmp(user_list[g], "")) {
+                        for(g = 0; g < 100; g++) {
+                            if(strcmp(user_list[g], "") && g != i) {
                                 strcat(msg, user_list[g]);
                                 strcat(msg, "$");
                             }
                         }
                         send(sd, msg, strlen(msg), 0 );
                     } else {
-                        for(g = 0; g < 3; g++) {
+                        for(g = 0; g < 100; g++) {
 //                            printf("Co porownujemy %s", user_list[g]);
 //                            printf(" %s", dest);
                             if(strcmp(user_list[g],dest) == 0){
@@ -264,10 +268,10 @@ int main(int argc , char *argv[])
                         sd = client_socket[g]; 
 					    send(sd , msg , strlen(msg) , 0 ); 
                     }
-                    buffer[0] = '\0';
-                    msg[0] = '\0';
-                    name[0] = '\0';
-                    dest[0] = '\0';
+//                    buffer[0] = '\0';
+//                    msg[0] = '\0';
+//                    name[0] = '\0';
+//                    dest[0] = '\0';
 				} 
 			} 
 		} 
