@@ -13,7 +13,8 @@ namespace klient
     {
         static void Main(string[] args)
         {
-            IPAddress ip = IPAddress.Parse("192.168.1.29");
+            //IPAddress ip = IPAddress.Parse("192.168.1.29");
+            IPAddress ip = IPAddress.Parse("192.168.2.104");
             int port = 1234;
             TcpClient client = new TcpClient();
             client.Connect(ip, port);
@@ -33,7 +34,7 @@ namespace klient
             string s;
             while (!string.IsNullOrEmpty((s = Console.ReadLine())))
             {
-                s = UserName + "$" + "Adam" + "$" + s + "$";
+                s = UserName + "$" + s + "$" + "Siema" + "$";
                 //Console.WriteLine(s);
                 buffer = Encoding.ASCII.GetBytes(s);
                 ns.Write(buffer, 0, buffer.Length);

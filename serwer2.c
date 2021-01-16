@@ -1,5 +1,3 @@
-//Example code: A simple server side code, which echos back the received message. 
-//Handle multiple socket connections with select and fd_set on Linux 
 #include <stdio.h> 
 #include <string.h> //strlen 
 #include <stdlib.h> 
@@ -38,6 +36,8 @@ char myhostname[1024];
 //    bzero(buffer, SIZE);
 //  }
 //}
+                        
+
 
 int main(int argc , char *argv[]) 
 { 
@@ -219,6 +219,7 @@ int main(int argc , char *argv[])
                     char* name;
                     char* dest;
                     char* msg;
+//                    char* msg2;
 //                    puts("a");
 //                    puts("%s", buffer);
                     char delim[] = "$"; 
@@ -228,6 +229,7 @@ int main(int argc , char *argv[])
                     
 //                    printf("%s\n", ptr);
                     name = ptr;
+                    msg = ptr;
                     
                     printf("Wiadomość od: %s\n", name);
                     
@@ -239,11 +241,10 @@ int main(int argc , char *argv[])
                     
                     if(strcmp(dest,"Welcome") == 0) {
                         strcpy(user_list[i], name);
-                        puts("a");
 //                        send(sd , buffer , strlen(buffer) , 0 ); 
                     } else if(strcmp(dest,"List") == 0) {
-                        strcpy(msg, "\0");
-                        for(g = 0; g < 100; g++) {
+                        strcpy(msg, "List$");
+                        for(g = 0; g < 99; g++) {
                             if(strcmp(user_list[g], "") && g != i) {
                                 strcat(msg, user_list[g]);
                                 strcat(msg, "$");
@@ -251,7 +252,7 @@ int main(int argc , char *argv[])
                         }
                         send(sd, msg, strlen(msg), 0 );
                     } else {
-                        for(g = 0; g < 100; g++) {
+                        for(g = 0; g < 99; g++) {
 //                            printf("Co porownujemy %s", user_list[g]);
 //                            printf(" %s", dest);
                             if(strcmp(user_list[g],dest) == 0){
@@ -259,14 +260,20 @@ int main(int argc , char *argv[])
                                 break;
                             }
                         }
+//                        char * msg2 = (char *) malloc(1 + strlen(name)+ strlen(msg) );
+                        puts("a");
+                        strcat(name, "$");
+                        puts("a");
                         ptr = strtok(NULL, delim);
                         msg = ptr;
-                        printf("Wiadomość : %s\n", msg);
-                        
+                        char * msg2 = (char *) malloc(1 + strlen(name)+ strlen(msg) );
+                        strcpy(msg2, name);
+                        strcat(msg2, msg);
+                        printf("Wiadomość : %s\n", msg2);
 //                        buffer[valread] = '\0'; 
-                        msg[strlen(msg)] = '\0';
+                        msg2[strlen(msg2)] = '\0';
                         sd = client_socket[g]; 
-					    send(sd , msg , strlen(msg) , 0 ); 
+					    send(sd , msg2 , strlen(msg2) , 0 ); 
                     }
 //                    buffer[0] = '\0';
 //                    msg[0] = '\0';
