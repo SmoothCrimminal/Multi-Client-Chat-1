@@ -14,7 +14,9 @@ namespace klient
         static void Main(string[] args)
         {
             //IPAddress ip = IPAddress.Parse("192.168.1.29");
-            IPAddress ip = IPAddress.Parse("192.168.2.104");
+            //IPAddress ip = IPAddress.Parse("192.168.2.104");
+            IPAddress ip = IPAddress.Parse("192.168.1.121");
+            
             int port = 1234;
             TcpClient client = new TcpClient();
             client.Connect(ip, port);
