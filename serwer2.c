@@ -219,6 +219,8 @@ int main(int argc , char *argv[])
                     char* name;
                     char* dest;
                     char* msg;
+                    char* fileSize;
+                    long long int sizeOfFile;
 //                    char* msg2;
 //                    puts("a");
 //                    puts("%s", buffer);
@@ -251,6 +253,48 @@ int main(int argc , char *argv[])
                             }
                         }
                         send(sd, msg, strlen(msg), 0 );
+                    } else if(strcmp(dest,"File") == 0){
+                        ptr = strtok(NULL, delim);
+                        msg = ptr;
+                        printf("nazwa pliku: %s\n", msg);
+                        ptr = strtok(NULL, delim);
+                        fileSize = ptr;
+                        printf("rozmiar pliku: %s\n", fileSize);
+                        sizeOfFile = atoi(fileSize);
+                        printf("rozmiar pliku w int: %lld\n", sizeOfFile);
+                        FILE *fp;
+                        int n = 0;
+                        char *filename = msg;
+                        char bufferf[SIZE+1];
+                        memset(bufferf, 0, sizeof bufferf);
+                        puts("a");
+                        
+                        fp = fopen(filename, "w");
+                        while(sizeOfFile > 0) {
+                            printf("czekamy na tresc pliku\n");
+                            n = recv(sd, bufferf, SIZE, 0);
+                            if (n <= 0){
+                                break;
+                            }
+                            printf("wpisujemy do pliku to co dostalismy: %s\n", bufferf);
+//                            fprintf(fp, "%s", bufferf);
+                            if (fwrite(bufferf, sizeof(char), n, fp) != n)
+                            {
+                                perror("Write File Error");
+                                exit(1);
+                            }
+//                            fputs(bufferf, fp);
+                            printf("zerujemy buffor\n");
+                            bzero(bufferf, SIZE);
+                            printf("zmniejszamy rozmiar\n");
+                            printf("zmniejszamy rozmiar\n");
+                            printf("Ile zostało do odebrania przed odjeciem: %lld \n", sizeOfFile);
+                            sizeOfFile = sizeOfFile - n;
+                            printf("Ile odebralismy teraz? %d \n", n);
+                            printf("Ile zostało do odebrania? %lld \n", sizeOfFile);
+                        }
+                        fclose(fp);
+                        printf("File created :) \n");
                     } else {
                         for(g = 0; g < 99; g++) {
 //                            printf("Co porownujemy %s", user_list[g]);
