@@ -1,17 +1,19 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Collections.Generic;
 using MessengerLogic;
+using System.IO;
 
 namespace Messenger
 {
     public class Connection
     {
+        public static int BufferSize = 1024;
         public static string nick;
-        public static IPAddress ip = IPAddress.Parse("192.168.1.121");
+        public static IPAddress ip = IPAddress.Parse("192.168.1.51");
         public static int port = 1234;
         public static TcpClient client = new TcpClient();
         public static List<string> users = new List<string>();
@@ -51,7 +53,6 @@ namespace Messenger
                     for (int i=1; i<fromServer.Length; i++)
                     {
                         users.Add(fromServer[i]);
-                        Console.WriteLine(fromServer[i]);
                     }
                     isEnd = true;
                 }
@@ -91,5 +92,36 @@ namespace Messenger
             ns.Write(buffer, 0, buffer.Length);
         }
 
+        public void FileSend(string filepath, string nick)
+        {
+            NetworkStream ns = client.GetStream();
+            FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            byte[] bytesToSend = new byte[fs.Length];
+            int numBytesRead = fs.Read(bytesToSend, 0, bytesToSend.Length);
+            int totalBytes = 0;
+
+            //Tutaj trzeba dodać, aby pobierał nazwę pliku
+            string temp = $"{nick}$File$tenor.pptx${fs.Length}";
+            byte[] buffer = ASCIIEncoding.ASCII.GetBytes(temp);
+            ns.Write(buffer, 0, buffer.Length);
+            Thread.Sleep(1000);
+            for (int i = 0; i <= fs.Length / BufferSize; i++)
+            {
+                if (fs.Length - (i * BufferSize) > BufferSize)
+                {
+                    ns.Write(bytesToSend, i * BufferSize,
+                        BufferSize);
+                    totalBytes += BufferSize;
+                }
+                else
+                {
+                    ns.Write(bytesToSend, i * BufferSize,
+                        (int)fs.Length - (i * BufferSize));
+                    totalBytes += (int)fs.Length - (i * BufferSize);
+                }
+            }
+            fs.Close();
+
+        }
     }
 }
