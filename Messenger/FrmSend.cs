@@ -39,7 +39,10 @@ namespace Messenger
 
             else if (txtMessageBox.Text.Trim() == "" && txtFilePath.Text.Trim() != "")
             {
-
+                string path = txtFilePath.Text;
+                string nick = FrmMenu._nickname;
+                Connection sendFile = new Connection();
+                sendFile.FileSend(path, nick);
             }
         }
 

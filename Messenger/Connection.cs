@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading;
 using System.Collections.Generic;
 using MessengerLogic;
+using System.IO;
 
 namespace Messenger
 {
     public class Connection
     {
+        public static int BufferSize = 1024;
         public static string nick;
-        public static IPAddress ip = IPAddress.Parse("192.168.56.1");
+        public static IPAddress ip = IPAddress.Parse("192.168.1.51");
         public static int port = 1234;
         public static TcpClient client = new TcpClient();
         public static List<string> users = new List<string>();
@@ -90,5 +92,33 @@ namespace Messenger
             ns.Write(buffer, 0, buffer.Length);
         }
 
+        public void FileSend(string filepath, string nick)
+        {
+            NetworkStream ns = client.GetStream();
+            FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            byte[] bytesToSend = new byte[fs.Length];
+            int numBytesRead = fs.Read(bytesToSend, 0, bytesToSend.Length);
+            int totalBytes = 0;
+            string temp = $"{nick}$File${filepath}$";
+            byte[] buffer = ASCIIEncoding.ASCII.GetBytes(temp);
+            ns.Write(buffer, 0, buffer.Length);
+            for (int i = 0; i <= fs.Length / BufferSize; i++)
+            {
+                if (fs.Length - (i * BufferSize) > BufferSize)
+                {
+                    ns.Write(bytesToSend, i * BufferSize,
+                        BufferSize);
+                    totalBytes += BufferSize;
+                }
+                else
+                {
+                    ns.Write(bytesToSend, i * BufferSize,
+                        (int)fs.Length - (i * BufferSize));
+                    totalBytes += (int)fs.Length - (i * BufferSize);
+                }
+                fs.Close();
+            }
+
+        }
     }
 }

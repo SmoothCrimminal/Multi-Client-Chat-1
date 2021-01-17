@@ -9,6 +9,7 @@ namespace Messenger
 {
     public partial class FrmMenu : Form
     {
+        public static string _nickname;
         public FrmMenu()
         {
             InitializeComponent();
@@ -25,11 +26,11 @@ namespace Messenger
                 MessageBox.Show("Please fill in the nickname field");
             else
             {
-                string nickname = txtNickname.Text;
+                _nickname = txtNickname.Text;
                 try
                 {
                     Connection connection = new Connection();
-                    connection.Connect(nickname);
+                    connection.Connect(_nickname);
                     FrmOnlineUsers frm = new FrmOnlineUsers();
                     this.Hide();
                     frm.Show();
