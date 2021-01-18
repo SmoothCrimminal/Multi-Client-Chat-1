@@ -15,10 +15,7 @@ namespace Messenger
 
         private void FrmOnlineUsers_Load(object sender, EventArgs e)
         {
-            if (FrmOnlineUsers.ActiveForm.Enabled == false)
-            {
-                Application.Exit();
-            }
+          
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -40,8 +37,13 @@ namespace Messenger
 
         private void btnChat_Click(object sender, EventArgs e)
         {
-            FrmSend frm = new FrmSend();
+            frm = new FrmSend();
             frm.Show();
+        }
+
+        private void FrmOnlineUsers_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

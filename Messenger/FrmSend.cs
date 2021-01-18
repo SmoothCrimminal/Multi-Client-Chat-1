@@ -41,6 +41,8 @@ namespace Messenger
             else if (txtMessageBox.Text.Trim() == "" && txtFilePath.Text.Trim() != "")
             {
                 string path = txtFilePath.Text;
+                string Unique = Guid.NewGuid().ToString();
+                string fileName = Path.GetFileName(path);
                 string[] extensions = { ".exe", ".py" };
                 string extension = Path.GetExtension(path);
                  if (extensions.Contains(extension))
@@ -52,7 +54,7 @@ namespace Messenger
                 else
                 {
                     Connection sendFile = new Connection();
-                    sendFile.FileSend(path, nick);
+                    sendFile.FileSend(path, nick, fileName);
                     txtFilePath.Text = "";
                 }
             }

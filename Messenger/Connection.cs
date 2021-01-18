@@ -92,7 +92,7 @@ namespace Messenger
             ns.Write(buffer, 0, buffer.Length);
         }
 
-        public void FileSend(string filepath, string nick)
+        public void FileSend(string filepath, string nick, string fileName)
         {
             NetworkStream ns = client.GetStream();
             FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
@@ -101,7 +101,7 @@ namespace Messenger
             int totalBytes = 0;
 
             //Tutaj trzeba dodać, aby pobierał nazwę pliku
-            string temp = $"{nick}$File$tenor.pptx${fs.Length}";
+            string temp = $"{nick}${fileName}${fs.Length}";
             byte[] buffer = ASCIIEncoding.ASCII.GetBytes(temp);
             ns.Write(buffer, 0, buffer.Length);
             Thread.Sleep(1000);

@@ -32,12 +32,12 @@ namespace Messenger
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOnlineUsers));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnChat = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
             this.chUsers = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.smallImgList = new System.Windows.Forms.ImageList(this.components);
-            this.btnChat = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,6 +51,18 @@ namespace Messenger
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(682, 71);
             this.panel1.TabIndex = 0;
+            // 
+            // btnChat
+            // 
+            this.btnChat.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnChat.Location = new System.Drawing.Point(416, 14);
+            this.btnChat.Name = "btnChat";
+            this.btnChat.Size = new System.Drawing.Size(148, 47);
+            this.btnChat.TabIndex = 7;
+            this.btnChat.Text = "Chat";
+            this.btnChat.UseVisualStyleBackColor = false;
+            this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
             // 
             // btnRefresh
             // 
@@ -102,18 +114,6 @@ namespace Messenger
             this.smallImgList.TransparentColor = System.Drawing.Color.Transparent;
             this.smallImgList.Images.SetKeyName(0, "775b91d4b1bfcac2aa3292b47763c1b1.jpg");
             // 
-            // btnChat
-            // 
-            this.btnChat.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnChat.Location = new System.Drawing.Point(416, 14);
-            this.btnChat.Name = "btnChat";
-            this.btnChat.Size = new System.Drawing.Size(148, 47);
-            this.btnChat.TabIndex = 7;
-            this.btnChat.Text = "Chat";
-            this.btnChat.UseVisualStyleBackColor = false;
-            this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
-            // 
             // FrmOnlineUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -123,6 +123,7 @@ namespace Messenger
             this.Controls.Add(this.panel1);
             this.Name = "FrmOnlineUsers";
             this.Text = "Online Users";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FrmOnlineUsers_FormClosed);
             this.Load += new System.EventHandler(this.FrmOnlineUsers_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
