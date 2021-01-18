@@ -31,10 +31,10 @@ namespace Messenger
         {
             this.txtMessages = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.txtFilePath = new System.Windows.Forms.TextBox();
             this.txtMessageBox = new System.Windows.Forms.TextBox();
             this.btnSend = new System.Windows.Forms.Button();
-            this.txtFilePath = new System.Windows.Forms.TextBox();
-            this.btnBrowse = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -64,6 +64,26 @@ namespace Messenger
             this.panel1.Size = new System.Drawing.Size(643, 163);
             this.panel1.TabIndex = 1;
             // 
+            // btnBrowse
+            // 
+            this.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnBrowse.Location = new System.Drawing.Point(432, 104);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(199, 47);
+            this.btnBrowse.TabIndex = 6;
+            this.btnBrowse.Text = "Browse";
+            this.btnBrowse.UseVisualStyleBackColor = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            // 
+            // txtFilePath
+            // 
+            this.txtFilePath.Location = new System.Drawing.Point(12, 104);
+            this.txtFilePath.Multiline = true;
+            this.txtFilePath.Name = "txtFilePath";
+            this.txtFilePath.Size = new System.Drawing.Size(408, 39);
+            this.txtFilePath.TabIndex = 5;
+            // 
             // txtMessageBox
             // 
             this.txtMessageBox.Location = new System.Drawing.Point(12, 8);
@@ -84,26 +104,6 @@ namespace Messenger
             this.btnSend.UseVisualStyleBackColor = false;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
-            // txtFilePath
-            // 
-            this.txtFilePath.Location = new System.Drawing.Point(12, 104);
-            this.txtFilePath.Multiline = true;
-            this.txtFilePath.Name = "txtFilePath";
-            this.txtFilePath.Size = new System.Drawing.Size(408, 39);
-            this.txtFilePath.TabIndex = 5;
-            // 
-            // btnBrowse
-            // 
-            this.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnBrowse.Location = new System.Drawing.Point(432, 104);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(199, 47);
-            this.btnBrowse.TabIndex = 6;
-            this.btnBrowse.Text = "Browse";
-            this.btnBrowse.UseVisualStyleBackColor = false;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -116,7 +116,7 @@ namespace Messenger
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.txtMessages);
             this.Name = "FrmSend";
-            this.Text = "MessageBox";
+            this.Text = "Group Chat";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);

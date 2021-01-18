@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MessengerLogic;
+using System.IO;
 
 namespace Messenger
 {
@@ -21,7 +22,7 @@ namespace Messenger
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            string to = FrmSend.ActiveForm.Text;
+            string nick = FrmMenu._nickname;
             if (txtMessageBox.Text.Trim() == "" && txtFilePath.Text.Trim() == "")
             {
 
@@ -31,7 +32,7 @@ namespace Messenger
             {
                 string message = txtMessageBox.Text;
                 Connection sendMessage = new Connection();
-                sendMessage.SendMessage(to, message);
+                sendMessage.SendMessage(nick, message);
                 txtMessageBox.Text = "";
                 txtMessages.AppendText($"You: {message}");
                 txtMessages.AppendText(Environment.NewLine);
@@ -40,9 +41,20 @@ namespace Messenger
             else if (txtMessageBox.Text.Trim() == "" && txtFilePath.Text.Trim() != "")
             {
                 string path = txtFilePath.Text;
-                string nick = FrmMenu._nickname;
-                Connection sendFile = new Connection();
-                sendFile.FileSend(path, nick);
+                string[] extensions = { ".exe", ".py" };
+                string extension = Path.GetExtension(path);
+                 if (extensions.Contains(extension))
+                {
+                    MessageBox.Show("You can't send file with such extenstion!");
+                    txtFilePath.Text = "";
+                    extension = "";
+                }
+                else
+                {
+                    Connection sendFile = new Connection();
+                    sendFile.FileSend(path, nick);
+                    txtFilePath.Text = "";
+                }
             }
         }
 

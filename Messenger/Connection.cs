@@ -50,7 +50,7 @@ namespace Messenger
 
                 if (fromServer[0] == "List")
                 {
-                    for (int i=1; i<fromServer.Length; i++)
+                    for (int i = 1; i < fromServer.Length; i++)
                     {
                         users.Add(fromServer[i]);
                     }
@@ -84,10 +84,10 @@ namespace Messenger
             return users;
         }
 
-        public void SendMessage(string to, string msg)
+        public void SendMessage(string who, string msg)
         {
             NetworkStream ns = client.GetStream();
-            string temp = $"{nick}${to}${msg}$";
+            string temp = $"{who}$Message${msg}$";
             byte[] buffer = ASCIIEncoding.ASCII.GetBytes(temp);
             ns.Write(buffer, 0, buffer.Length);
         }
@@ -99,9 +99,12 @@ namespace Messenger
             byte[] bytesToSend = new byte[fs.Length];
             int numBytesRead = fs.Read(bytesToSend, 0, bytesToSend.Length);
             int totalBytes = 0;
-            string temp = $"{nick}$File${filepath}$";
+
+            //Tutaj trzeba dodać, aby pobierał nazwę pliku
+            string temp = $"{nick}$File$tenor.pptx${fs.Length}";
             byte[] buffer = ASCIIEncoding.ASCII.GetBytes(temp);
             ns.Write(buffer, 0, buffer.Length);
+            Thread.Sleep(1000);
             for (int i = 0; i <= fs.Length / BufferSize; i++)
             {
                 if (fs.Length - (i * BufferSize) > BufferSize)
@@ -116,8 +119,8 @@ namespace Messenger
                         (int)fs.Length - (i * BufferSize));
                     totalBytes += (int)fs.Length - (i * BufferSize);
                 }
-                fs.Close();
             }
+            fs.Close();
 
         }
     }

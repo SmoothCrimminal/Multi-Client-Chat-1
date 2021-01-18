@@ -29,24 +29,38 @@ namespace Messenger
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmOnlineUsers));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listView1 = new System.Windows.Forms.ListView();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.chUsers = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.smallImgList = new System.Windows.Forms.ImageList(this.components);
+            this.btnChat = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnChat);
             this.panel1.Controls.Add(this.btnRefresh);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(511, 55);
+            this.panel1.Size = new System.Drawing.Size(682, 71);
             this.panel1.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::Messenger.Properties.Resources.refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(593, 12);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(52, 49);
+            this.btnRefresh.TabIndex = 2;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // label1
             // 
@@ -54,7 +68,7 @@ namespace Messenger
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.label1.Image = ((System.Drawing.Image)(resources.GetObject("label1.Image")));
             this.label1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(256, 39);
             this.label1.TabIndex = 1;
@@ -68,35 +82,43 @@ namespace Messenger
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(0, 55);
+            this.listView1.Location = new System.Drawing.Point(0, 71);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(511, 533);
+            this.listView1.Size = new System.Drawing.Size(682, 517);
+            this.listView1.SmallImageList = this.smallImgList;
             this.listView1.TabIndex = 1;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
-            this.listView1.ItemActivate += new System.EventHandler(this.listView1_ItemActivate);
             this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = global::Messenger.Properties.Resources.refresh;
-            this.btnRefresh.Location = new System.Drawing.Point(447, 6);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(52, 49);
-            this.btnRefresh.TabIndex = 2;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // chUsers
             // 
             this.chUsers.Text = "Users:";
-            this.chUsers.Width = 508;
+            this.chUsers.Width = 691;
+            // 
+            // smallImgList
+            // 
+            this.smallImgList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("smallImgList.ImageStream")));
+            this.smallImgList.TransparentColor = System.Drawing.Color.Transparent;
+            this.smallImgList.Images.SetKeyName(0, "775b91d4b1bfcac2aa3292b47763c1b1.jpg");
+            // 
+            // btnChat
+            // 
+            this.btnChat.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnChat.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnChat.Location = new System.Drawing.Point(416, 14);
+            this.btnChat.Name = "btnChat";
+            this.btnChat.Size = new System.Drawing.Size(148, 47);
+            this.btnChat.TabIndex = 7;
+            this.btnChat.Text = "Chat";
+            this.btnChat.UseVisualStyleBackColor = false;
+            this.btnChat.Click += new System.EventHandler(this.btnChat_Click);
             // 
             // FrmOnlineUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 588);
+            this.ClientSize = new System.Drawing.Size(682, 588);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.panel1);
             this.Name = "FrmOnlineUsers";
@@ -115,5 +137,7 @@ namespace Messenger
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.ColumnHeader chUsers;
+        private System.Windows.Forms.ImageList smallImgList;
+        private System.Windows.Forms.Button btnChat;
     }
 }

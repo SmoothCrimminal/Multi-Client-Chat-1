@@ -15,7 +15,10 @@ namespace Messenger
 
         private void FrmOnlineUsers_Load(object sender, EventArgs e)
         {
-            
+            if (FrmOnlineUsers.ActiveForm.Enabled == false)
+            {
+                Application.Exit();
+            }
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -26,8 +29,7 @@ namespace Messenger
             listView1.Items.Clear();
             foreach (var person in allUsers)
             {
-                ListViewItem item = new ListViewItem(person);
-                listView1.Items.Add(item);
+                listView1.Items.Add(person, 0);
             }
         }
 
@@ -36,12 +38,9 @@ namespace Messenger
 
         }
 
-        private void listView1_ItemActivate(object sender, EventArgs e)
+        private void btnChat_Click(object sender, EventArgs e)
         {
-            int i = listView1.SelectedIndices[0];
-            string s = listView1.Items[i].Text;
-            frm = new FrmSend();
-            frm.Text = s;
+            FrmSend frm = new FrmSend();
             frm.Show();
         }
     }
